@@ -1,0 +1,186 @@
+
+
+#include "kernel.h"
+#include "kernel_id.h"
+#include "ecrobot_interface.h"
+
+/**** CODE GLUE, A MODIFIER/ADAPTER */
+/* Ici : inclusion du header Lustre */
+#include "Planificateur.h"
+#include "Regulateur.h"
+#include "string.h"
+
+/***** OSEK : NE PAS MODIFIER */
+/* OSEK declarations */
+DeclareCounter(SysTimerCnt);
+DeclareResource(lcd);
+DeclareTask(Regulateur);
+DeclareTask(Planificateur);
+
+
+/**Variables partagées entre les 2 taches**/
+_real capteur_detect = 0;
+long blancG, blancD;
+long noirG, noirD;
+
+
+/* LEJOS OSEK hook to be invoked from an ISR in category 2 */
+void user_1ms_isr_type2(void)
+{
+  StatusType ercd;
+
+  ercd = SignalCounter(SysTimerCnt); /* Increment OSEK Alarm Counter */
+  if(ercd != E_OK)
+  {
+    ShutdownOS(ercd);
+  }
+}
+/******* FIN OSEK */
+
+/* Initialisation et finalisations OSEK */
+void ecrobot_device_initialize() {
+
+	/*
+		ICI : on peut mettre du code qui sera appelé automatiquement
+		      à l'initialisation de la brique
+		(ne rien mettre si pas nécessaire)
+	*/
+   ecrobot_set_light_sensor_active(NXT_PORT_S1);
+   ecrobot_set_light_sensor_active(NXT_PORT_S2);
+   ecrobot_init_sonar_sensor(NXT_PORT_S3);
+
+
+}
+
+void ecrobot_device_terminate() {
+
+	/*
+		ICI : on peut mettre du code qui sera appelé automatiquement
+		      à la l'extinction de la brique
+		(ne rien mettre si pas nécessaire)
+	*/
+   ecrobot_set_light_sensor_inactive(NXT_PORT_S1);
+   ecrobot_set_light_sensor_inactive(NXT_PORT_S2);
+   ecrobot_term_sonar_sensor(NXT_PORT_S3);
+}
+
+/**
+ * Affiche a l'ecran "what var"
+ */
+void show_var(char* what, int line, int var) {
+	GetResource(lcd);
+	display_goto_xy(0, line);
+	display_string(what);
+	display_goto_xy(strlen(what)+1, line);
+	display_int(var, 5);
+	display_update();
+	ReleaseResource(lcd);
+}
+
+/**** CODE GLUE, A MODIFIER/ADAPTER */
+/*
+
+REMARQUE :
+
+  Comme on doit instancier un seul noeud Lustre, on utilise
+l'option -ctx-static du compilateur lus2c, car elle donne
+du code plus facile àinterfacer.
+
+
+On doit se débrouiller pour que NOS initialisations
+soient effectuées. Comme on ne veut PAS TOUCHER
+une seule ligne au code OSEK, on utilise un kernel_cfg.c
+modifié, où une nouvelle fonction, "usr_init()", est
+appelée à l'initialisation du système.
+Cette fonction doit être définie ici, dans le code glue :
+*/
+
+void usr_init(void) {
+  // Initialisation du noeud Lustre
+  	
+  	show_var("blanc", 0, 0);
+	do {
+	   blancD = ecrobot_get_light_sensor(NXT_PORT_S1);
+	   blancG = ecrobot_get_light_sensor(NXT_PORT_S2);
+	   }
+	while (!ecrobot_is_ENTER_button_pressed());
+	systick_wait_ms(500);
+	show_var("noir", 1, 0);
+	do {
+	   noirD = ecrobot_get_light_sensor(NXT_PORT_S1);
+	   noirG = ecrobot_get_light_sensor(NXT_PORT_S2);
+	   }
+	while (!ecrobot_is_ENTER_button_pressed());
+	systick_wait_ms(500);
+	display_clear(1);
+	
+  	Planificateur_init();
+  	Regulateur_init();
+}
+
+
+/* Procédures de sorties */
+void Regulateur_O_Out1(_real ud){
+	nxt_motor_set_speed(NXT_PORT_A, (int)(ud * 100 * 0.2), 0);
+}
+void Regulateur_O_Out2(_real ug){
+	nxt_motor_set_speed(NXT_PORT_B, (int)(ug * 100 * 0.2), 0);
+}
+Planificateur_O_Out1(_boolean b){
+	if (b)
+		capteur_detect = 1;
+	else
+		capteur_detect = 0;
+}
+
+/** OSEK : SEUL LE CORPS DE LA TACHE DOIT ETRE MODIFIE/ADAPTE */
+TASK(Regulateur)
+{
+
+
+	long sensG, sensD;
+	/* --> ICI, ON MET LE CODE QUI CORRESPOND A 1 REACTION */
+
+	/* Positionnement des entrées */
+	sensD = ecrobot_get_light_sensor(NXT_PORT_S1);
+	sensG = ecrobot_get_light_sensor(NXT_PORT_S2);
+   Regulateur_I_In1((sensD - noirD)*200/(blancD - noirD) - 100);
+   Regulateur_I_In2((sensG - noirG)*200/(blancG - noirG) - 100);
+   Regulateur_I_In3(capteur_detect);
+
+	/* Appel du step */
+   Regulateur_step();
+
+	/* Raffraichit le LCD */
+   display_update();
+
+	/* --> FIN DU CODE */
+
+
+	/* OSEK : FINALISATION TASK, NE PAS TOUCHER */
+   TerminateTask();
+}
+
+TASK(Planificateur)
+{
+
+	/* --> ICI, ON MET LE CODE QUI CORRESPOND A 1 REACTION */
+
+	/* Positionnement des entrées */
+   Planificateur_I_In1(ecrobot_get_light_sensor(NXT_PORT_S2));
+   Planificateur_I_In2(ecrobot_get_sonar_sensor(NXT_PORT_S3));
+   
+
+	/* Appel du step */
+   Planificateur_step();
+
+	/* Raffraichit le LCD */
+   display_update();
+
+	/* --> FIN DU CODE */
+
+
+	/* OSEK : FINALISATION TASK, NE PAS TOUCHER */
+   TerminateTask();
+}
+

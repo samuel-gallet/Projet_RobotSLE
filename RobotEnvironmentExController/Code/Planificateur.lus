@@ -1,0 +1,52 @@
+-- mdl2lus - 2014 ver. 0.04 (SHA bef4d05)
+-- Tue Dec  9 16:24:57 2014
+node Planificateur(In1: real; In2: real) returns (Out1: bool);
+var
+   w_000: bool;
+   w_001: real;
+   w_002: bool;
+   w_003: bool;
+   w_004: bool;
+   w_005: bool;
+   w_006: bool;
+   w_007: real;
+let
+   Out1 = w_004;
+   w_006 = BNB(w_007);
+   w_003 = (if w_006 then w_002 else w_000);
+   w_005 = (w_001 <= 20.0);
+   w_000 = (false -> (pre w_004));
+   w_004 = (w_005 or w_003);
+   w_007 = In1;
+   w_001 = In2;
+   w_002 = false;
+tel
+node BNB(Cg: real) returns (BNB_n: bool);
+var
+   w_000: bool;
+   w_001: real;
+   w_002: bool;
+   w_003: bool;
+   w_004: bool;
+   w_005: bool;
+   w_006: bool;
+   w_007: bool;
+   w_008: bool;
+   w_009: bool;
+   w_010: bool;
+   w_011: bool;
+let
+   w_001 = Cg;
+   w_007 = (w_008 or w_006);
+   w_008 = (w_002 and w_011);
+   w_000 = (w_009 and w_007);
+   w_009 = (w_001 >= 50.0);
+   w_010 = (false -> (pre w_004));
+   BNB_n = w_000;
+   w_002 = (not w_009);
+   w_003 = (if w_000 then w_005 else w_007);
+   w_006 = (false -> (pre w_003));
+   w_011 = (w_009 or w_010);
+   w_004 = (if w_000 then w_005 else w_011);
+   w_005 = false;
+tel
