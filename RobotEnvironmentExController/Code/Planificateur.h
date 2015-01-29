@@ -20,10 +20,12 @@ typedef float _float;
 #define _true 1
 #endif
 /*--------- Pragmas ----------------*/
-//MODULE: Planificateur 2 1
+//MODULE: Planificateur 2 3
 //IN: _real In1
 //IN: _real In2
 //OUT: _boolean Out1
+//OUT: _boolean bool2
+//OUT: _boolean bool1
 #ifndef _Planificateur_EC2C_SRC_FILE
 /*-------- Input procedures -------------*/
 extern void Planificateur_I_In1(_real);

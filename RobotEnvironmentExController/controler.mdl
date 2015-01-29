@@ -29,7 +29,7 @@ Model {
       Name		      "Out2"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.10"
+    ComputedModelVersion    "1.19"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -75,10 +75,10 @@ Model {
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
 	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"88"
+	LoadSaveID		"91"
 	Extents			[1042.0, 684.0]
-	ZoomFactor		[1.0]
-	Offset			[0.0, 0.0]
+	ZoomFactor		[0.8]
+	Offset			[-81.046575981378453, -20.749999999999897]
       }
     }
   }
@@ -88,9 +88,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "gallets"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Dec 09 16:23:36 2014"
-  RTWModifiedTimeStamp	  340043014
-  ModelVersionFormat	  "1.%<AutoIncrement:10>"
+  LastModifiedDate	  "Tue Dec 16 16:37:30 2014"
+  RTWModifiedTimeStamp	  340648649
+  ModelVersionFormat	  "1.%<AutoIncrement:19>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -975,7 +975,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "156"
+    SIDHighWatermark	    "165"
     Block {
       BlockType		      Inport
       Name		      "In1"
@@ -1060,14 +1060,14 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "Planificateur"
 	  SID			  "88"
-	  Ports			  [2, 1]
+	  Ports			  [2, 3]
 	  Position		  [260, 405, 300, 465]
 	  ZOrder		  17
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Planificateur"
 	    Location		    [637, 187, 1715, 1018]
-	    Open		    on
+	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -1083,7 +1083,7 @@ Model {
 	      BlockType		      Inport
 	      Name		      "In1"
 	      SID		      "89"
-	      Position		      [95, 20, 125, 35]
+	      Position		      [230, 20, 260, 35]
 	      ZOrder		      15
 	      BlockRotation	      270
 	      BlockMirror	      on
@@ -1104,14 +1104,14 @@ Model {
 	      BlockType		      SubSystem
 	      Name		      "BNB"
 	      SID		      "91"
-	      Ports		      [1, 1]
-	      Position		      [135, 177, 215, 233]
+	      Ports		      [2, 3]
+	      Position		      [270, 177, 350, 233]
 	      ZOrder		      14
 	      RequestExecContextInheritance off
 	      System {
 		Name			"BNB"
 		Location		[637, 187, 1715, 1018]
-		Open			off
+		Open			on
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
 		ScreenColor		"white"
@@ -1127,8 +1127,17 @@ Model {
 		  BlockType		  Inport
 		  Name			  "Cg"
 		  SID			  "92"
-		  Position		  [150, 123, 180, 137]
+		  Position		  [225, 123, 255, 137]
 		  ZOrder		  -2
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "obs"
+		  SID			  "161"
+		  Position		  [20, 413, 50, 427]
+		  ZOrder		  25
+		  Port			  "2"
 		  IconDisplay		  "Port number"
 		}
 		Block {
@@ -1136,7 +1145,7 @@ Model {
 		  Name			  "Compare\nTo Constant"
 		  SID			  "93"
 		  Ports			  [1, 1]
-		  Position		  [245, 115, 275, 145]
+		  Position		  [320, 115, 350, 145]
 		  ZOrder		  6
 		  LibraryVersion	  "1.287"
 		  SourceBlock		  "simulink/Logic and Bit\nOperations/Compare\nTo Constant"
@@ -1151,7 +1160,7 @@ Model {
 		  BlockType		  Constant
 		  Name			  "Constant"
 		  SID			  "94"
-		  Position		  [20, 215, 50, 245]
+		  Position		  [95, 215, 125, 245]
 		  ZOrder		  12
 		  Value			  "0"
 		}
@@ -1160,7 +1169,7 @@ Model {
 		  Name			  "Logical\nOperator"
 		  SID			  "95"
 		  Ports			  [2, 1]
-		  Position		  [330, 121, 360, 154]
+		  Position		  [405, 121, 435, 154]
 		  ZOrder		  5
 		  Operator		  "OR"
 		  AllPortsSameDT	  off
@@ -1171,7 +1180,7 @@ Model {
 		  Name			  "Logical\nOperator1"
 		  SID			  "96"
 		  Ports			  [2, 1]
-		  Position		  [415, 117, 445, 148]
+		  Position		  [490, 117, 520, 148]
 		  ZOrder		  7
 		  AllPortsSameDT	  off
 		  OutDataTypeStr	  "boolean"
@@ -1181,7 +1190,7 @@ Model {
 		  Name			  "Logical\nOperator2"
 		  SID			  "97"
 		  Ports			  [2, 1]
-		  Position		  [485, 127, 515, 158]
+		  Position		  [560, 127, 590, 158]
 		  ZOrder		  8
 		  Operator		  "OR"
 		  AllPortsSameDT	  off
@@ -1192,7 +1201,7 @@ Model {
 		  Name			  "Logical\nOperator3"
 		  SID			  "98"
 		  Ports			  [2, 1]
-		  Position		  [560, 122, 590, 153]
+		  Position		  [635, 122, 665, 153]
 		  ZOrder		  10
 		  AllPortsSameDT	  off
 		  OutDataTypeStr	  "boolean"
@@ -1202,7 +1211,7 @@ Model {
 		  Name			  "Logical\nOperator4"
 		  SID			  "99"
 		  Ports			  [1, 1]
-		  Position		  [320, 49, 350, 81]
+		  Position		  [395, 49, 425, 81]
 		  ZOrder		  20
 		  Operator		  "NOT"
 		  AllPortsSameDT	  off
@@ -1212,9 +1221,9 @@ Model {
 		  BlockType		  Switch
 		  Name			  "Switch"
 		  SID			  "100"
-		  Position		  [160, 225, 210, 265]
+		  Position		  [235, 225, 285, 265]
 		  ZOrder		  11
-		  Criteria		  "u2 > Threshold"
+		  Criteria		  "u2 ~= 0"
 		  InputSameDT		  off
 		  SaturateOnIntegerOverflow off
 		}
@@ -1222,9 +1231,9 @@ Model {
 		  BlockType		  Switch
 		  Name			  "Switch1"
 		  SID			  "101"
-		  Position		  [395, 220, 445, 260]
+		  Position		  [470, 220, 520, 260]
 		  ZOrder		  13
-		  Criteria		  "u2 > Threshold"
+		  Criteria		  "u2 ~= 0"
 		  InputSameDT		  off
 		  SaturateOnIntegerOverflow off
 		}
@@ -1232,7 +1241,7 @@ Model {
 		  BlockType		  UnitDelay
 		  Name			  "Unit Delay"
 		  SID			  "102"
-		  Position		  [465, 223, 500, 257]
+		  Position		  [540, 223, 575, 257]
 		  ZOrder		  21
 		  InputProcessing	  "Elements as channels (sample based)"
 		  SampleTime		  "-1"
@@ -1241,7 +1250,7 @@ Model {
 		  BlockType		  UnitDelay
 		  Name			  "Unit Delay1"
 		  SID			  "103"
-		  Position		  [245, 228, 280, 262]
+		  Position		  [320, 228, 355, 262]
 		  ZOrder		  22
 		  InputProcessing	  "Elements as channels (sample based)"
 		  SampleTime		  "-1"
@@ -1250,8 +1259,26 @@ Model {
 		  BlockType		  Outport
 		  Name			  "BNB\n"
 		  SID			  "104"
-		  Position		  [1025, 123, 1055, 137]
+		  Position		  [1100, 123, 1130, 137]
 		  ZOrder		  -6
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "bool1"
+		  SID			  "157"
+		  Position		  [450, 488, 480, 502]
+		  ZOrder		  23
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "bool2"
+		  SID			  "158"
+		  Position		  [575, 453, 605, 467]
+		  ZOrder		  24
+		  Port			  "3"
 		  IconDisplay		  "Port number"
 		}
 		Line {
@@ -1260,10 +1287,10 @@ Model {
 		  SrcPort		  1
 		  Points		  [11, 0]
 		  Branch {
-		    ZOrder		    2
-		    Points		    [0, 176; -231, 0]
+		    ZOrder		    45
+		    Points		    [0, 176; -252, 0; 0, -86]
 		    DstBlock		    "Switch"
-		    DstPort		    3
+		    DstPort		    1
 		  }
 		  Branch {
 		    ZOrder		    3
@@ -1275,9 +1302,19 @@ Model {
 		  ZOrder		  4
 		  SrcBlock		  "Unit Delay1"
 		  SrcPort		  1
-		  Points		  [21, 0; 0, -100]
-		  DstBlock		  "Logical\nOperator"
-		  DstPort		  2
+		  Points		  [19, 0]
+		  Branch {
+		    ZOrder		    28
+		    Points		    [0, 250]
+		    DstBlock		    "bool1"
+		    DstPort		    1
+		  }
+		  Branch {
+		    ZOrder		    27
+		    Points		    [2, 0; 0, -100]
+		    DstBlock		    "Logical\nOperator"
+		    DstPort		    2
+		  }
 		}
 		Line {
 		  ZOrder		  5
@@ -1334,9 +1371,19 @@ Model {
 		  ZOrder		  14
 		  SrcBlock		  "Unit Delay"
 		  SrcPort		  1
-		  Points		  [9, 0; 0, -43; -39, 0; 0, -47]
-		  DstBlock		  "Logical\nOperator2"
-		  DstPort		  2
+		  Points		  [4, 0]
+		  Branch {
+		    ZOrder		    30
+		    Points		    [0, 39; -53, 0; 0, 181]
+		    DstBlock		    "bool2"
+		    DstPort		    1
+		  }
+		  Branch {
+		    ZOrder		    29
+		    Points		    [5, 0; 0, -43; -39, 0; 0, -47]
+		    DstBlock		    "Logical\nOperator2"
+		    DstPort		    2
+		  }
 		}
 		Line {
 		  ZOrder		  15
@@ -1344,14 +1391,15 @@ Model {
 		  SrcPort		  1
 		  Points		  [45, 0]
 		  Branch {
+		    ZOrder		    44
+		    Points		    [0, 36; 45, 0]
+		    DstBlock		    "Switch"
+		    DstPort		    3
+		  }
+		  Branch {
 		    ZOrder		    16
 		    Points		    [0, -34; 246, 0; 0, 29]
 		    DstBlock		    "Switch1"
-		    DstPort		    1
-		  }
-		  Branch {
-		    ZOrder		    17
-		    DstBlock		    "Switch"
 		    DstPort		    1
 		  }
 		}
@@ -1388,28 +1436,26 @@ Model {
 		  ZOrder		  22
 		  SrcBlock		  "Logical\nOperator3"
 		  SrcPort		  1
-		  Points		  [20, 0]
+		  Points		  [40, 0; 0, -10; 9, 0]
 		  Branch {
-		    ZOrder		    23
-		    Points		    [0, 190; -484, 0; 0, -85]
-		    DstBlock		    "Switch"
-		    DstPort		    2
-		  }
-		  Branch {
-		    ZOrder		    24
-		    Points		    [20, 0; 0, -10; 9, 0]
-		    Branch {
 		    ZOrder		    25
 		    DstBlock		    "BNB\n"
 		    DstPort		    1
-		    }
-		    Branch {
+		  }
+		  Branch {
 		    ZOrder		    26
 		    Points		    [0, 249; -273, 0; 0, -139]
 		    DstBlock		    "Switch1"
 		    DstPort		    2
-		    }
 		  }
+		}
+		Line {
+		  ZOrder		  50
+		  SrcBlock		  "obs"
+		  SrcPort		  1
+		  Points		  [96, 0; 0, -175]
+		  DstBlock		  "Switch"
+		  DstPort		  2
 		}
 	      }
 	    }
@@ -1418,14 +1464,14 @@ Model {
 	      Name		      "Compare\nTo Constant"
 	      SID		      "105"
 	      Ports		      [1, 1]
-	      Position		      [290, 140, 320, 170]
+	      Position		      [425, 140, 455, 170]
 	      ZOrder		      7
 	      LibraryVersion	      "1.287"
 	      SourceBlock	      "simulink/Logic and Bit\nOperations/Compare\nTo Constant"
 	      SourceType	      "Compare To Constant"
 	      ContentPreviewEnabled   off
 	      relop		      "<="
-	      const		      "20"
+	      const		      "8"
 	      OutDataTypeStr	      "boolean"
 	      ZeroCross		      on
 	    }
@@ -1433,7 +1479,7 @@ Model {
 	      BlockType		      Constant
 	      Name		      "Constant"
 	      SID		      "106"
-	      Position		      [85, 265, 115, 295]
+	      Position		      [220, 265, 250, 295]
 	      ZOrder		      9
 	      Value		      "0"
 	    }
@@ -1442,7 +1488,7 @@ Model {
 	      Name		      "Logical\nOperator"
 	      SID		      "107"
 	      Ports		      [2, 1]
-	      Position		      [375, 147, 405, 178]
+	      Position		      [510, 147, 540, 178]
 	      ZOrder		      6
 	      Operator		      "OR"
 	      AllPortsSameDT	      off
@@ -1452,7 +1498,7 @@ Model {
 	      BlockType		      Switch
 	      Name		      "Switch2"
 	      SID		      "108"
-	      Position		      [280, 275, 330, 315]
+	      Position		      [415, 275, 465, 315]
 	      ZOrder		      5
 	      Criteria		      "u2 > Threshold"
 	      InputSameDT	      off
@@ -1462,7 +1508,7 @@ Model {
 	      BlockType		      UnitDelay
 	      Name		      "Unit Delay"
 	      SID		      "109"
-	      Position		      [225, 293, 260, 327]
+	      Position		      [360, 293, 395, 327]
 	      ZOrder		      19
 	      InputProcessing	      "Elements as channels (sample based)"
 	      SampleTime	      "-1"
@@ -1471,15 +1517,33 @@ Model {
 	      BlockType		      Outport
 	      Name		      "Out1"
 	      SID		      "110"
-	      Position		      [415, 28, 445, 42]
+	      Position		      [550, 28, 580, 42]
 	      ZOrder		      17
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "bool2"
+	      SID		      "159"
+	      Position		      [635, 198, 665, 212]
+	      ZOrder		      25
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "bool1"
+	      SID		      "160"
+	      Position		      [705, 348, 735, 362]
+	      ZOrder		      26
+	      Port		      "3"
 	      IconDisplay	      "Port number"
 	    }
 	    Line {
 	      ZOrder		      1
 	      SrcBlock		      "In1"
 	      SrcPort		      1
-	      Points		      [0, 165]
+	      Points		      [0, 150]
 	      DstBlock		      "BNB"
 	      DstPort		      1
 	    }
@@ -1505,9 +1569,19 @@ Model {
 	      Points		      [28, 0]
 	      Branch {
 		ZOrder			5
-		Points			[0, 189; -230, 0; 0, -44]
-		DstBlock		"Unit Delay"
-		DstPort			1
+		Points			[0, 189; -230, 0]
+		Branch {
+		  ZOrder		  17
+		  Points		  [-139, 0; 0, -134]
+		  DstBlock		  "BNB"
+		  DstPort		  2
+		}
+		Branch {
+		  ZOrder		  16
+		  Points		  [0, -44]
+		  DstBlock		  "Unit Delay"
+		  DstPort		  1
+		}
 	      }
 	      Branch {
 		ZOrder			6
@@ -1544,6 +1618,22 @@ Model {
 	      SrcPort		      1
 	      DstBlock		      "Switch2"
 	      DstPort		      3
+	    }
+	    Line {
+	      ZOrder		      11
+	      SrcBlock		      "BNB"
+	      SrcPort		      3
+	      Points		      [249, 0; 0, -20]
+	      DstBlock		      "bool2"
+	      DstPort		      1
+	    }
+	    Line {
+	      ZOrder		      12
+	      SrcBlock		      "BNB"
+	      SrcPort		      2
+	      Points		      [20, 0; 0, 7; 245, 0; 0, 143]
+	      DstBlock		      "bool1"
+	      DstPort		      1
 	    }
 	  }
 	}
@@ -2407,7 +2497,7 @@ Model {
 	  ZOrder		  8
 	  SrcBlock		  "Planificateur"
 	  SrcPort		  1
-	  Points		  [40, 0; 0, -180]
+	  Points		  [40, 0; 0, -160]
 	  DstBlock		  "Regulateur"
 	  DstPort		  3
 	}

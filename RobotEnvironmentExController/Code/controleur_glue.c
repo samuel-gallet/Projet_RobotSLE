@@ -98,17 +98,21 @@ Cette fonction doit être définie ici, dans le code glue :
 void usr_init(void) {
   // Initialisation du noeud Lustre
   	
-  	show_var("blanc", 0, 0);
+  	
 	do {
-	   blancD = ecrobot_get_light_sensor(NXT_PORT_S1);
-	   blancG = ecrobot_get_light_sensor(NXT_PORT_S2);
+		blancD = ecrobot_get_light_sensor(NXT_PORT_S1);
+		blancG = ecrobot_get_light_sensor(NXT_PORT_S2);
+		show_var("blanc d", 0, blancD);
+		show_var("blanc g", 1, blancG);
 	   }
 	while (!ecrobot_is_ENTER_button_pressed());
 	systick_wait_ms(500);
-	show_var("noir", 1, 0);
+	display_clear(1);
 	do {
-	   noirD = ecrobot_get_light_sensor(NXT_PORT_S1);
-	   noirG = ecrobot_get_light_sensor(NXT_PORT_S2);
+		noirD = ecrobot_get_light_sensor(NXT_PORT_S1);
+		noirG = ecrobot_get_light_sensor(NXT_PORT_S2);
+		show_var("noir d", 0, noirD);
+		show_var("noir g", 1, noirG);
 	   }
 	while (!ecrobot_is_ENTER_button_pressed());
 	systick_wait_ms(500);
@@ -116,27 +120,42 @@ void usr_init(void) {
 	
   	Planificateur_init();
   	Regulateur_init();
+  	do {
+  		show_var("sonar", 5, (int)ecrobot_get_sonar_sensor(NXT_PORT_S3));
+  	} while (!ecrobot_is_ENTER_button_pressed());
+  	
 }
 
 
 /* Procédures de sorties */
 void Regulateur_O_Out1(_real ud){
-	nxt_motor_set_speed(NXT_PORT_A, (int)(ud * 100 * 0.2), 0);
+	show_var("roue droite", 0, (int)(ud * 100 * 0.2));
+	nxt_motor_set_speed(NXT_PORT_A, 0, 0);
 }
 void Regulateur_O_Out2(_real ug){
-	nxt_motor_set_speed(NXT_PORT_B, (int)(ug * 100 * 0.2), 0);
+	show_var("roue gauche", 1, (int)(ug * 100 * 0.2));
+	nxt_motor_set_speed(NXT_PORT_B, 0, 0);
 }
 Planificateur_O_Out1(_boolean b){
 	if (b)
-		capteur_detect = 1;
+		capteur_detect = 1.0;
 	else
-		capteur_detect = 0;
+		capteur_detect = 0.0;
 }
 
+Planificateur_O_bool2(_boolean b){
+	show_var("bool2", 6, (int)(b));
+	display_update();
+}
+
+Planificateur_O_bool1(_boolean b){
+	show_var("bool1", 7, (int)(b));
+	display_update();
+}
+int i = 0;
 /** OSEK : SEUL LE CORPS DE LA TACHE DOIT ETRE MODIFIE/ADAPTE */
 TASK(Regulateur)
 {
-
 
 	long sensG, sensD;
 	/* --> ICI, ON MET LE CODE QUI CORRESPOND A 1 REACTION */
@@ -144,9 +163,15 @@ TASK(Regulateur)
 	/* Positionnement des entrées */
 	sensD = ecrobot_get_light_sensor(NXT_PORT_S1);
 	sensG = ecrobot_get_light_sensor(NXT_PORT_S2);
-   Regulateur_I_In1((sensD - noirD)*200/(blancD - noirD) - 100);
-   Regulateur_I_In2((sensG - noirG)*200/(blancG - noirG) - 100);
+   Regulateur_I_In1(((sensG - noirG)*100/(blancG - noirG)));
+   Regulateur_I_In2(((sensG - noirG)*100/(blancG - noirG)));
    Regulateur_I_In3(capteur_detect);
+   
+
+   show_var("obstacle", 2, (int)capteur_detect);
+   show_var("CG", 3, (int)((sensG - noirG)*100/(blancG - noirG)));
+   show_var("CD", 4, (int)((sensD - noirD)*100/(blancD - noirD)));
+   show_var("sonar", 5, (int)ecrobot_get_sonar_sensor(NXT_PORT_S3));
 
 	/* Appel du step */
    Regulateur_step();
@@ -163,11 +188,12 @@ TASK(Regulateur)
 
 TASK(Planificateur)
 {
-
 	/* --> ICI, ON MET LE CODE QUI CORRESPOND A 1 REACTION */
 
 	/* Positionnement des entrées */
-   Planificateur_I_In1(ecrobot_get_light_sensor(NXT_PORT_S2));
+	long sensG;
+	sensG = ecrobot_get_light_sensor(NXT_PORT_S2);
+   Planificateur_I_In1(ecrobot_get_light_sensor(((sensG - noirG)*100/(blancG - noirG))));
    Planificateur_I_In2(ecrobot_get_sonar_sensor(NXT_PORT_S3));
    
 
