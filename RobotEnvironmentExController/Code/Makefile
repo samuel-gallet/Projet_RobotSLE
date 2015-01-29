@@ -64,6 +64,11 @@ Regulateur.c: Regulateur.lus
 Regulateur.lus:
 	mdl2lus ../controler.mdl -system Regulateur 
 
+genc:
+	mdl2lus ../controler.mdl -system Regulateur
+	mdl2lus ../controler.mdl -system Planificateur
+	lus2c Regulateur.lus Regulateur -ctx-static
+	lus2c Planificateur.lus Planificateur -ctx-static
 
 clear: clean
 	rm -f *.xml Planificateur.lus Planificateur.c Planificateur.h Regulateur.lus Regulateur.c Regulateur.h *.ec *.mws

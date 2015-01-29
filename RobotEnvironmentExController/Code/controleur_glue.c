@@ -129,12 +129,18 @@ void usr_init(void) {
 
 /* Procédures de sorties */
 void Regulateur_O_Out1(_real ud){
-	show_var("roue droite", 0, (int)(ud * 100 * 0.2));
-	nxt_motor_set_speed(NXT_PORT_A, 0, 0);
+	ud=ud*100;
+	ud=ud>75?75:ud;
+	ud=ud<-75?-75:ud;
+	show_var("ud", 0, ud);
+	nxt_motor_set_speed(NXT_PORT_A, ud, 0);
 }
 void Regulateur_O_Out2(_real ug){
-	show_var("roue gauche", 1, (int)(ug * 100 * 0.2));
-	nxt_motor_set_speed(NXT_PORT_B, 0, 0);
+	ug=ug*100;
+	ug=ug>75?75:ug;
+	ug=ug<-75?-75:ug;
+	show_var("ug", 1, ug);
+	nxt_motor_set_speed(NXT_PORT_B, ug, 0);
 }
 Planificateur_O_Out1(_boolean b){
 	if (b)
@@ -143,15 +149,6 @@ Planificateur_O_Out1(_boolean b){
 		capteur_detect = 0.0;
 }
 
-Planificateur_O_bool2(_boolean b){
-	show_var("bool2", 6, (int)(b));
-	display_update();
-}
-
-Planificateur_O_bool1(_boolean b){
-	show_var("bool1", 7, (int)(b));
-	display_update();
-}
 int i = 0;
 /** OSEK : SEUL LE CORPS DE LA TACHE DOIT ETRE MODIFIE/ADAPTE */
 TASK(Regulateur)
@@ -163,15 +160,15 @@ TASK(Regulateur)
 	/* Positionnement des entrées */
 	sensD = ecrobot_get_light_sensor(NXT_PORT_S1);
 	sensG = ecrobot_get_light_sensor(NXT_PORT_S2);
-   Regulateur_I_In1(((sensG - noirG)*100/(blancG - noirG)));
-   Regulateur_I_In2(((sensG - noirG)*100/(blancG - noirG)));
+   Regulateur_I_In1((double)((sensG - noirG)*100/(blancG - noirG)));
+   Regulateur_I_In2((double)((sensD - noirD)*100/(blancD - noirD)));
    Regulateur_I_In3(capteur_detect);
    
 
-   show_var("obstacle", 2, (int)capteur_detect);
-   show_var("CG", 3, (int)((sensG - noirG)*100/(blancG - noirG)));
-   show_var("CD", 4, (int)((sensD - noirD)*100/(blancD - noirD)));
-   show_var("sonar", 5, (int)ecrobot_get_sonar_sensor(NXT_PORT_S3));
+   show_var("obstacle", 4, (int)capteur_detect);
+   show_var("CG", 3, (double)((sensG - noirG)*100/(blancG - noirG)));
+   show_var("CD", 2, (double)((sensD - noirD)*100/(blancD - noirD)));
+   //show_var("sonar", 5, (int)ecrobot_get_sonar_sensor(NXT_PORT_S3));
 
 	/* Appel du step */
    Regulateur_step();
@@ -193,7 +190,7 @@ TASK(Planificateur)
 	/* Positionnement des entrées */
 	long sensG;
 	sensG = ecrobot_get_light_sensor(NXT_PORT_S2);
-   Planificateur_I_In1(ecrobot_get_light_sensor(((sensG - noirG)*100/(blancG - noirG))));
+   Planificateur_I_In1(((sensG - noirG)*100/(blancG - noirG)));
    Planificateur_I_In2(ecrobot_get_sonar_sensor(NXT_PORT_S3));
    
 

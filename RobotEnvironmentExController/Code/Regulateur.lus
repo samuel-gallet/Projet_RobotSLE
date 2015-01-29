@@ -1,8 +1,6 @@
--- mdl2lus - 2014 ver. 0.04 (SHA bef4d05)
--- Tue Dec 16 16:37:42 2014
-const kp_teta : real;
+-- mdl2lus - 2014 ver. 0.41 (SHA 79444ea)
+-- Thu Jan 29 19:37:03 2015
 const pi : real;
-const ki_teta : real;
 node Regulateur(In1: real; In2: real; In3: real) returns (Out1: real; Out2: real);
 var
    w_000: real;
@@ -22,9 +20,9 @@ let
    Out2 = w_003;
    (w_004, w_006) = Calcul_ecart(w_009, w_005);
    (w_007, w_008) = Subsystem(w_004, w_006);
-   w_002 = (if w_010>0.0 then w_001 else w_007);
-   w_003 = (if w_010>0.0 then w_000 else w_008);
-   w_000 = (1.0);
+   w_002 = (if w_010<>0.0 then w_001 else w_007);
+   w_003 = (if w_010<>0.0 then w_000 else w_008);
+   w_000 = (- 1.0);
    w_009 = In1;
    w_005 = In2;
    w_001 = 1.0;
@@ -58,10 +56,10 @@ let
    w_006 = (w_016 + w_015);
    w_005 = (0.002 * w_010);
    w_010 = eps_theta;
-   w_015 = (kp_teta * w_010);
+   w_015 = (0.4 * w_010);
    w_012 = (2.0 * w_006);
    w_011 = (0.005 * w_000);
-   w_016 = (ki_teta * w_004);
+   w_016 = (0.2 * w_004);
    u_g = w_001;
    w_003 = (0.0 -> (pre w_004));
    w_009 = (if w_012<0.0 then -w_012 else w_012);

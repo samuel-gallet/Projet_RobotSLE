@@ -10,8 +10,6 @@
 /*--------
  * the following ``constants'' must be defined:
 extern _real pi;
-extern _real kp_teta;
-extern _real ki_teta;
 --------*/
 /*--------
 Internal structure for the call
@@ -94,13 +92,14 @@ void Regulateur_step(){
    _real L10;
    _real L7;
    _real L3;
+   _real L40;
+   _real L43;
    _real L42;
    _real L41;
-   _real L40;
    _real L39;
    _real T25;
 //CODE
-   L4 = (ctx._In3 > 0.000000E+00);
+   L4 = (ctx._In3 != 0.000000E+00);
    L8 = (1.000000E+00 / 2.000000E+00);
    L18 = (pi / 2.000000E+02);
    L21 = (ctx._In2 - ctx._In1);
@@ -112,8 +111,8 @@ void Regulateur_step(){
       L22 = ctx.M25;
    }
    L14 = (L15 + L22);
-   L12 = (ki_teta * L14);
-   L26 = (kp_teta * L17);
+   L12 = (2.000000E-01 * L14);
+   L26 = (4.000000E-01 * L17);
    L11 = (L12 + L26);
    L33 = (2.000000E+00 * L11);
    L32 = (L33 < 0.000000E+00);
@@ -136,13 +135,14 @@ void Regulateur_step(){
       L3 = L7;
    }
    Regulateur_O_Out1(L3);
-   L42 = (- L11);
-   L41 = (L42 + L28);
-   L40 = (L8 * L41);
+   L40 = (- 1.000000E+00);
+   L43 = (- L11);
+   L42 = (L43 + L28);
+   L41 = (L8 * L42);
    if (L4) {
-      L39 = 1.000000E+00;
-   } else {
       L39 = L40;
+   } else {
+      L39 = L41;
    }
    Regulateur_O_Out2(L39);
    T25 = L14;

@@ -16,8 +16,6 @@ typedef struct  {
    _real _In2;
    //OUTPUTS
    _boolean _Out1;
-   _boolean _bool2;
-   _boolean _bool1;
    //REGISTERS
    _boolean M23;
    _boolean M23_nil;
@@ -41,12 +39,8 @@ void Planificateur_I_In2(_real V){
    ctx._In2 = V;
 }
 extern void Planificateur_O_Out1(_boolean);
-extern void Planificateur_O_bool2(_boolean);
-extern void Planificateur_O_bool1(_boolean);
 #ifdef CKCHECK
 extern void Planificateur_BOT_Out1();
-extern void Planificateur_BOT_bool2();
-extern void Planificateur_BOT_bool1();
 #endif
 /*--------
 Internal reset input procedure
@@ -116,8 +110,6 @@ void Planificateur_step(){
    }
    L2 = (L3 || L5);
    Planificateur_O_Out1(L2);
-   Planificateur_O_bool2(L19);
-   Planificateur_O_bool1(L13);
    T23 = L2;
    if (L6) {
       L21 = _false;
