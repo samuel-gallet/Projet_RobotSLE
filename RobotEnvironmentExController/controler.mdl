@@ -29,7 +29,7 @@ Model {
       Name		      "Out2"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.29"
+    ComputedModelVersion    "1.31"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -52,7 +52,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [312.0, 83.0, 1910.0, 995.0]
+      Location		      [8.0, 57.0, 1910.0, 995.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -75,10 +75,10 @@ Model {
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
 	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"125"
+	LoadSaveID		"111"
 	Extents			[1874.0, 848.0]
-	ZoomFactor		[1.25]
-	Offset			[-253.49243108119541, -85.016493911862071]
+	ZoomFactor		[1.5]
+	Offset			[-130.21256363783451, -15.297028841243227]
       }
     }
   }
@@ -88,9 +88,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "mansourr"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Jan 29 17:29:36 2015"
-  RTWModifiedTimeStamp	  344453305
-  ModelVersionFormat	  "1.%<AutoIncrement:29>"
+  LastModifiedDate	  "Tue Feb 10 10:18:23 2015"
+  RTWModifiedTimeStamp	  345464116
+  ModelVersionFormat	  "1.%<AutoIncrement:31>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -961,7 +961,7 @@ Model {
   }
   System {
     Name		    "controler"
-    Location		    [0, 51, 1920, 1056]
+    Location		    [8, 57, 1918, 1052]
     Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1017,7 +1017,7 @@ Model {
       RequestExecContextInheritance off
       System {
 	Name			"Controller"
-	Location		[2, 51, 1922, 1056]
+	Location		[8, 57, 1918, 1052]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1066,7 +1066,7 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Planificateur"
-	    Location		    [2, 51, 1922, 1056]
+	    Location		    [8, 57, 1918, 1052]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -1573,8 +1573,8 @@ Model {
 	  RequestExecContextInheritance	off
 	  System {
 	    Name		    "Regulateur"
-	    Location		    [719, 51, 2629, 1046]
-	    Open		    off
+	    Location		    [8, 57, 1918, 1052]
+	    Open		    on
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -1585,7 +1585,7 @@ Model {
 	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
+	    ZoomFactor		    "150"
 	    Block {
 	      BlockType		      Inport
 	      Name		      "In1"
@@ -1623,7 +1623,7 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Calcul ecart"
-		Location		[719, 51, 2629, 1046]
+		Location		[8, 57, 1918, 1052]
 		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
@@ -1791,8 +1791,8 @@ Model {
 	      RequestExecContextInheritance off
 	      System {
 		Name			"Subsystem"
-		Location		[312, 83, 2222, 1078]
-		Open			on
+		Location		[8, 57, 1918, 1052]
+		Open			off
 		ModelBrowserVisibility	off
 		ModelBrowserWidth	200
 		ScreenColor		"white"
@@ -2473,7 +2473,6 @@ Model {
       ZOrder		      8
       SrcBlock		      "Controller"
       SrcPort		      1
-      Points		      [0, 0]
       DstBlock		      "Out1"
       DstPort		      1
     }
@@ -2481,7 +2480,6 @@ Model {
       ZOrder		      9
       SrcBlock		      "Controller"
       SrcPort		      2
-      Points		      [0, 0]
       DstBlock		      "Out2"
       DstPort		      1
     }

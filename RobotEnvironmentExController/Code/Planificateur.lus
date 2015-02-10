@@ -1,5 +1,5 @@
 -- mdl2lus - 2014 ver. 0.41 (SHA 79444ea)
--- Thu Jan 29 19:37:03 2015
+-- Tue Feb 10 10:55:53 2015
 node Planificateur(In1: real; In2: real) returns (Out1: bool);
 var
    w_000: real;

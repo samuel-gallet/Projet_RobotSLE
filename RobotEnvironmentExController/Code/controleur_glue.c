@@ -129,16 +129,16 @@ void usr_init(void) {
 
 /* Procédures de sorties */
 void Regulateur_O_Out1(_real ud){
-	ud=ud*100;
-	ud=ud>75?75:ud;
-	ud=ud<-75?-75:ud;
+	ud=ud*110;
+	ud=ud>80?80:ud;
+	ud=ud<-80?-80:ud;
 	show_var("ud", 0, ud);
 	nxt_motor_set_speed(NXT_PORT_A, ud, 0);
 }
 void Regulateur_O_Out2(_real ug){
-	ug=ug*100;
-	ug=ug>75?75:ug;
-	ug=ug<-75?-75:ug;
+	ug=ug*110;
+	ug=ug>80?80:ug;
+	ug=ug<-80?-80:ug;
 	show_var("ug", 1, ug);
 	nxt_motor_set_speed(NXT_PORT_B, ug, 0);
 }
@@ -190,7 +190,7 @@ TASK(Planificateur)
 	/* Positionnement des entrées */
 	long sensG;
 	sensG = ecrobot_get_light_sensor(NXT_PORT_S2);
-   Planificateur_I_In1(((sensG - noirG)*100/(blancG - noirG)));
+   Planificateur_I_In1((double)((sensG - noirG)*100/(blancG - noirG)));
    Planificateur_I_In2(ecrobot_get_sonar_sensor(NXT_PORT_S3));
    
 
